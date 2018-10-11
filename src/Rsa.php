@@ -1,6 +1,6 @@
 <?php
 
-namespace tinymeng;
+namespace tinymeng\tools;
 
 /**
  * 使用openssl实现非对称加密

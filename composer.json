@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "tinymeng\\oauth\\": "src"
+            "tinymeng\\tools\\": "src"
         },
         "files": []
     }

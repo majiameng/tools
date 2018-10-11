@@ -1,6 +1,6 @@
 <?php
 
-namespace tinymeng;
+namespace tinymeng\tools;
 
 /**
  * HTTP 请求类

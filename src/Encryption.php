@@ -1,6 +1,6 @@
 <?php
 
-namespace tinymeng;
+namespace tinymeng\tools;
 /**
  * Name: Doc.php.
  * Author: JiaMeng <666@majiameng.com>
