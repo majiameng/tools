@@ -7,6 +7,10 @@ PHP Tools Class
 ## 1.安装
 > composer require tinymeng/tools dev-master
 
+
+* HTTP请求工具类
+* 中英文装换工具类
+
 #### 2.1.HttpRequest Class
 > Use curl implementation request,Support uploading pictures and custom header !
 

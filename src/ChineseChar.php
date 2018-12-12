@@ -12,7 +12,7 @@ class ChineseChar
 
     static public function getArray()
     {
-        return unserialize(file_get_contents('./example/chinese-char-library.txt'));
+        return unserialize(file_get_contents('./lib/chinese-char-library.txt'));
     }
 
     /**
