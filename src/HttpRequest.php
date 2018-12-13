@@ -35,7 +35,7 @@ class HttpRequest
 
         /** 设置请求链接 */
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HEADER, 1);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
         /** 设置请求参数 */
@@ -106,7 +106,7 @@ class HttpRequest
 
         /** 设置请求链接 */
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HEADER, 1);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
         /** 不验证https证书和hosts */
