@@ -5,11 +5,12 @@ PHP Tools Class
 
 
 ## 1.安装
-> composer require tinymeng/tools dev-master
+> composer require tinymeng/tools:~1.0.5  -vvv
 
 
 * HTTP请求工具类
 * 中英文装换工具类
+* 字符串加密解密算法
 
 #### 2.1.HttpRequest Class
 > Use curl implementation request,Support uploading pictures and custom header !
@@ -23,10 +24,16 @@ use tinymeng\tools\HttpRequest;
         'password'=>'majiameng',
     );
     $url = 'http://majiameng.com/login';
-    //Curl Post Request
+    //1.Curl Post Request
     $response = HttpRequest::httpPost($url,$data);
-    //Curl GET Request
-    $response = HttpRequest::httpGet($url);
+    //2.Curl Post File Request
+    //<input name="file" type="file">
+    $data = array(
+        'file' => new \CURLFile($_FILES['file']['tmp_name'],$_FILES['file']['type'],$_FILES['file']['name']),
+    );
+    $response = HttpRequest::httpPost($url,$data);
+    //3.Curl Get Request
+    $response = HttpRequest::httpGet($url,$data);
 
 ```
 
@@ -76,3 +83,24 @@ use tinymeng\tools\ChineseChar;
 ```
 
 
+#### 2.3.Encryption Class
+
+> 字符串加密解密算法 String Encryption and Decryption Algorithms
+
+```php
+<?php
+use tinymeng\tools\Encryption;
+$key = 'tinymeng';//secret key                    
+
+//1.encode
+$content = "hellow word!";//Content to be encrypted
+$content = Encryption::authcode($content,'encode',$key);
+var_dump($content);//Encrypted content
+//$content = 5797GYDPx0tBkgEV8Dnk183p43qX0HIkjiklLv7Os78tDWxnwpbmGDo
+
+//2.decode
+$string = Encryption::authcode($content,'decode',$key);
+var_dump($string);//Decrypted content
+//$string = hellow word!
+
+```

@@ -29,7 +29,7 @@ class HttpRequest
      * @return mixed
      * @throws \Exception
      */
-    static public function httpPost($url, $param = [], $httpHeaders = [],$proxy='', $http_code = 200)
+    static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy=(string)'', $http_code = (int)200)
     {
         $curl = curl_init();
 
@@ -44,9 +44,9 @@ class HttpRequest
 
         /** 设置请求headers */
         if(empty($httpHeaders)){
-            $httpHeaders = [
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36",
-            ];
+            $httpHeaders = array(
+                "UserModel-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36",
+            );
         }
         if (is_array($httpHeaders)){
             curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
@@ -76,9 +76,9 @@ class HttpRequest
 
         /** 验证网络请求状态 */
         if (intval($info["http_code"]) === 0) {
-            throw new \Exception('post请求失败! 请求url :' . $url . ' , 请求data : ' . var_export($param));
+            throw new \Exception('[\tinymeng\tools\HttpRequest::httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param));
         }elseif(intval($info["http_code"]) != $http_code){
-            throw new \Exception('post请求失败! 请求url :' . $url . ' , 请求data : ' . var_export($param).'  返回状态: '.$info["http_code"]);
+            throw new \Exception('[\tinymeng\tools\HttpRequest::httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param).' ,return code : '.$info["http_code"] .' ,return content : '.$content);
         } else {
             return $content;
         }
@@ -91,11 +91,12 @@ class HttpRequest
      * @param string $url 请求链接
      * @param array $param 请求参数
      * @param array $httpHeaders 添加请求头
+     * @param string $proxy
      * @param int $http_code 相应正确的状态码
      * @return mixed
      * @throws \Exception
      */
-    static public function httpGet($url, $param = [], $httpHeaders = [],$proxy='',  $http_code = 200)
+    static public function httpGet($url, $param = array(), $httpHeaders = array(),$proxy= (string)'',  $http_code = (int)200)
     {
         $curl = curl_init();
 
@@ -126,9 +127,9 @@ class HttpRequest
 
         /** 设置请求headers */
         if(empty($httpHeaders)){
-            $httpHeaders = [
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36",
-            ];
+            $httpHeaders = array(
+                "UserModel-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36",
+            );
         }
         if (is_array($httpHeaders)){
             curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
@@ -143,9 +144,9 @@ class HttpRequest
 
         /** 验证网络请求状态 */
         if (intval($info["http_code"]) === 0) {
-            throw new \Exception('post请求失败! 请求url :' . $url );
+            throw new \Exception('[\tinymeng\tools\HttpRequest::httpGet]: GET request was aborted ! Request url :' . $url );
         }elseif(intval($info["http_code"]) != $http_code){
-            throw new \Exception('get请求失败! 请求url :' . $url .'  返回状态: '.$info["http_code"]);
+            throw new \Exception('[\tinymeng\tools\HttpRequest::httpGet]: GET request was aborted ! Request url :' . $url .' ,return code : '.$info["http_code"] .' ,return content : '.$content);
         } else {
             return $content;
         }

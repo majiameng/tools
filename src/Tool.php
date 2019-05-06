@@ -10,7 +10,6 @@ namespace tinymeng\tools;
 
 class Tool{
 
-
     /**
      * Description:  对象到数组转换
      * Author: JiaMeng <666@majiameng.com>
@@ -72,7 +71,7 @@ class Tool{
         }
         // 脑残法，判断手机发送的客户端标志,兼容性有待提高
         if (isset ($_SERVER['HTTP_USER_AGENT'])) {
-            $clientKeyWords = [
+            $clientKeyWords = array(
                 'nokia',
                 'sony',
                 'ericsson',
@@ -104,7 +103,8 @@ class Tool{
                 'cldc',
                 'midp',
                 'wap',
-                'mobile'];
+                'mobile'
+            );
             // 从HTTP_USER_AGENT中查找手机浏览器的关键字
             if (preg_match("/(" . implode('|', $clientKeyWords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
                 return true;
