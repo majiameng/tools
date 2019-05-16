@@ -5,7 +5,7 @@ PHP Tools Class
 
 
 ## 1.安装
-> composer require tinymeng/tools:~1.0.5  -vvv
+> composer require tinymeng/tools:~1.0.6  -vvv
 
 
 * HTTP请求工具类

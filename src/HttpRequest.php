@@ -29,7 +29,7 @@ class HttpRequest
      * @return mixed
      * @throws \Exception
      */
-    static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy=(string)'', $http_code = (int)200)
+    static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy='', $http_code = 200)
     {
         $curl = curl_init();
 
@@ -96,7 +96,7 @@ class HttpRequest
      * @return mixed
      * @throws \Exception
      */
-    static public function httpGet($url, $param = array(), $httpHeaders = array(),$proxy= (string)'',  $http_code = (int)200)
+    static public function httpGet($url, $param = array(), $httpHeaders = array(),$proxy= '',  $http_code = 200)
     {
         $curl = curl_init();
 
