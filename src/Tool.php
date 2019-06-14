@@ -134,4 +134,50 @@ class Tool{
         return false;
     }
 
+
+    /**
+     * Name: 首字母大写
+     * Author: Tinymeng <666@majiameng.com>
+     * @param $str
+     * @return string
+     */
+    public static function uFirst($str)
+    {
+        return ucfirst(strtolower($str));
+    }
+
+    /**
+     * Name: 拼接url
+     * Author: Tinymeng <666@majiameng.com>
+     * @param $params
+     * @param bool $urlencode
+     * @param array $except
+     * @return string
+     */
+    public static function buildParams($params, $urlencode = false, $except = ['sign'])
+    {
+        $param_str = '';
+        foreach ($params as $k => $v) {
+            if (in_array($k, $except)) {
+                continue;
+            }
+            $param_str .= $k . '=';
+            $param_str .= $urlencode ? rawurlencode($v) : $v;
+            $param_str .= '&';
+        }
+        return rtrim($param_str, '&');
+    }
+
+    /**
+     * Name: 生成随机字符串
+     * Author: Tinymeng <666@majiameng.com>
+     * @param int $length
+     * @return bool|string
+     */
+    public static function random($length = 16)
+    {
+        $str_pol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        return substr(str_shuffle($str_pol), 0, $length);
+    }
+
 }
