@@ -40,7 +40,7 @@ class HttpRequest
 
         /** 设置请求参数 */
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $param);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, ($param));
 
         /** 设置请求headers */
         if(empty($httpHeaders)){
