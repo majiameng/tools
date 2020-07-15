@@ -1,7 +1,10 @@
 <?php
 namespace tinymeng\tools;
 /**
- * 字符串类
+ * Class 字符串类
+ * @package tinymeng\tools
+ * @Author: TinyMeng <666@majiameng.com>
+ * @Created: 2018/11/26
  */
 class Strings
 {
@@ -12,7 +15,7 @@ class Strings
      * @author Tinymeng <666@majiameng.com>
      * @date: 2019/9/26 10:19
      */
-    static public function uFirst($str){
+    static public function uFirst($str):string{
         return ucfirst(strtolower($str));
     }
 
@@ -22,9 +25,60 @@ class Strings
      * @param int $length 字符串长度
      * @return string
      */
-    public static function generateRandomString($length = 10) {
+    public static function generateRandomString($length = 10):string {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         return substr(str_shuffle($characters), 0, $length);
+    }
+
+
+    /**
+     * 获取唯一设备号
+     * @Author: TinyMeng <666@majiameng.com>
+     * @param string $namespace
+     * @return string
+     */
+    static public function createChannelId($namespace = ''):string {
+        static $guid = '';
+        $uid = uniqid("", true);
+        $data = $namespace. md5(time() . mt_rand(1,1000000)).uniqid();
+        $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
+        $guid = substr($hash, 0, 8) .
+            '-' .
+            substr($hash, 8, 4) .
+            '-' .
+            substr($hash, 12, 4) .
+            '-' .
+            substr($hash, 16, 4) .
+            '-' .
+            substr($hash, 20, 12);
+        return $guid;
+    }
+
+    /**
+     * 获取md5中16位小写
+     * 实现java的 MD516.Bit16
+     * @Author: TinyMeng <666@majiameng.com>
+     * @param $str
+     * @return string
+     */
+    static public function md5Bit16($str):string {
+        return strtoupper(substr(md5($str),8,16));
+    }
+
+    /**
+     * 获取时间戳(13位精确到豪妙)
+     * @Author: TinyMeng <666@majiameng.com>
+     * @param null $time
+     * @return int
+     */
+    static public function millisecond($time = null) :int{
+        if(empty($time)){
+            list($msec, $sec) = explode(' ', microtime());
+            $millisecond = (int)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
+        }else{
+            $millisecond = strtotime($time)."000";
+        }
+        return (int)$millisecond;
     }
 
     /**
@@ -33,7 +87,7 @@ class Strings
      * @param string $string
      * @return bool
      */
-    public static function isContainChinese($string='') {
+    public static function isContainChinese($string=''):bool {
         $result = preg_match('/[\x{4e00}-\x{9fa5}]/u', $string);
         return $result == 0 ? false : true;
     }
@@ -44,7 +98,7 @@ class Strings
      * @param string $string
      * @return bool
      */
-    public static function isAllChinese($string='') {
+    public static function isAllChinese($string=''):bool {
         $result = preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $string);
         return $result == 0 ? false : true;
     }
@@ -56,7 +110,7 @@ class Strings
      * @param string $string
      * @return bool
      */
-    public static function isMobile($string='') {
+    public static function isMobile($string=''):bool {
         if (!preg_match("/(^1[3|4|5|7|8][0-9]{9}$)/", $string)) {
             return false;
         }
@@ -123,7 +177,7 @@ class Strings
      * @param $html
      * @return string
      */
-    public static function filterATag($html='') {
+    public static function filterATag($html=''):string {
         return preg_replace("#<a[^>]*>(.*?)</a>#is", "$1", $html);
     }
 
@@ -134,7 +188,7 @@ class Strings
      * @param $html
      * @return string
      */
-    public static function deleteATag($html='') {
+    public static function deleteATag($html=''):string {
         return preg_replace("#<a[^>]*>(.*?)</a>#is", "", $html);
     }
 
@@ -144,9 +198,9 @@ class Strings
      * Updater:
      * @param string $date 时间
      * @param bool $is_timestamp   是否是时间戳
-     * @return false|string
+     * @return string
      */
-    public static function getTime($date,$is_timestamp=false){
+    public static function getTime($date,$is_timestamp=false):string {
         if($is_timestamp == true){
             $time = $date;
         }else{
@@ -184,7 +238,7 @@ class Strings
      * @param string $html_source
      * @return string
      */
-    static public function compressHtml($html_source){
+    static public function compressHtml($html_source):string {
         $chunks   = preg_split('/(<!--<nocompress>-->.*?<!--<\/nocompress>-->|<nocompress>.*?<\/nocompress>|<pre.*?\/pre>|<textarea.*?\/textarea>|<script.*?\/script>)/msi', $html_source, -1, PREG_SPLIT_DELIM_CAPTURE);
         $compress = '';
         foreach ($chunks as $c) {
@@ -237,10 +291,10 @@ class Strings
      * Description:  html标签替换成特定小程序标签
      * Author: JiaMeng <666@majiameng.com>
      * Updater:
-     * @param $content
+     * @param string $content
      * @return mixed
      */
-    static public function htmlReplaceXcx($content){
+    static public function htmlReplaceXcx(string $content):string {
         $content = str_replace("\r\n","",$content);//出除回车和换行符
         $content = preg_replace("/style=\".*?\"/si",'',$content);//style样式
         $content = preg_replace(["/<strong.*?>/si", "/<\/strong>/si"],['<text class="wx-strong">','</text>'],$content);//strong
@@ -256,8 +310,10 @@ class Strings
      * Description:  html P标签替换成特定Span标签(安卓app使用)
      * Author: JiaMeng <666@majiameng.com>
      * Updater:
+     * @param string $content
+     * @return string
      */
-    static public function pReplaceSpan($content){
+    static public function pReplaceSpan(string $content):string {
         $content = str_replace(["\r","\n","\t"],'',$content);
         $content = preg_replace(["/<p/si", "/<\/p>/si"],['<span','</span><br>'],$content);//p
         return $content;

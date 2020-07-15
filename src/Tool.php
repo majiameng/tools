@@ -160,4 +160,22 @@ class Tool{
         return $result;
     }
 
+    /**
+     * 空数组转为object
+     * 给安卓出接口时部分要求[]返回{}(数组返回字典类型)
+     * @Author: TinyMeng <666@majiameng.com>
+     * @param $data
+     */
+    static public function nullArrayToObject(&$data){
+        foreach ($data as $key=>&$val){
+            if(is_array($val)){
+                if(empty($val)){
+                    settype($val,'object');
+                }else{
+                    self::nullArrayToObject($val);
+                }
+            }
+        }
+    }
+
 }
