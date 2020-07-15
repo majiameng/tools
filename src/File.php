@@ -3,6 +3,7 @@ namespace tinymeng\tools;
 /**
  * 文件操作类
  */
+define('logFilePath',dirname(dirname(dirname(dirname(__DIR__)))).DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'tinymeng'.DIRECTORY_SEPARATOR.'log'.DIRECTORY_SEPARATOR);
 class File
 {
 
@@ -26,7 +27,7 @@ class File
         if($echo){
             echo $message;
         }
-        $path = dirname(dirname(dirname(dirname(__DIR__)))).'/storage/writeLog/';
+        $path = logFilePath;
         if (!is_dir($path)) {
             if(!mkdir($path, 0755, true)){
                 die('创建缓存文件夹"'.$path.'"失败!');
