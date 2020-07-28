@@ -56,9 +56,10 @@ class File{
             self::mkdir($dir_name);
         }
 
-        if (file_exists($file_name)){
-            chmod($file_name,0755);
-        }
+        //添加文件权限
+        self::chmod($file_name);
+
+        //内容写入文件
         if($file_append === false){
             file_put_contents($file_name,$content);
         }else{
@@ -86,9 +87,10 @@ class File{
             self::mkdir($dir_name);
         }
 
-        if (file_exists($file_name)){
-            chmod($file_name,0755);
-        }
+        //添加文件权限
+        self::chmod($file_name);
+
+        //内容写入文件
         if($file_append === false){
             $handle = fopen($file_name, 'w');
             fwrite($handle, $content);
@@ -99,6 +101,7 @@ class File{
             fclose($handle);
         }
     }
+
 
     /**
      * Name: 创建文件夹
@@ -149,6 +152,17 @@ class File{
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * @Author: TinyMeng <666@majiameng.com>
+     * @param $file_name
+     * @param int $mode
+     */
+    static public function chmod($file_name,$mode = 0755){
+        if (file_exists($file_name)){
+            @chmod($file_name,$mode);
         }
     }
 }
