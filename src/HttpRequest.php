@@ -2,6 +2,9 @@
 
 namespace tinymeng\tools;
 
+use tinymeng\tools\exception\StatusCode;
+use tinymeng\tools\exception\TinymengException;
+
 /**
  * HTTP 请求类
  */
@@ -76,9 +79,13 @@ class HttpRequest
 
         /** 验证网络请求状态 */
         if (intval($info["http_code"]) === 0) {
-            throw new \Exception('[\tinymeng\tools\HttpRequest::httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param));
+            throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                '[\tinymeng\tools\HttpRequest::httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true)
+            );
         }elseif(intval($info["http_code"]) != $http_code){
-            throw new \Exception('[\tinymeng\tools\HttpRequest::httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param).' ,return code : '.$info["http_code"] .' ,return content : '.$content);
+            throw new \Exception(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                '[\tinymeng\tools\HttpRequest::httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true).' ,return code : '.$info["http_code"] .' ,return content : '.$content
+            );
         } else {
             return $content;
         }

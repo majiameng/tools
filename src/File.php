@@ -63,9 +63,6 @@ class File{
         if($file_append === false){
             file_put_contents($file_name,$content);
         }else{
-//            $handle = fopen($file_name, 'a+');
-//            fwrite($handle, $content);
-//            fclose($handle);
             file_put_contents($file_name,$content,FILE_APPEND);
         }
     }
