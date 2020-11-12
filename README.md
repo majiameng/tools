@@ -104,3 +104,12 @@ var_dump($string);//Decrypted content
 //$string = hellow word!
 
 ```
+
+
+### 版本修复
+
+2020-11-12 更新以下功能
+Tag v1.1.2
+```
+1.修改TinymengException异常类
+```
