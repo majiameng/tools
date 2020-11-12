@@ -22,7 +22,7 @@ class TinymengException extends \Exception
 
         /** message */
         if(empty($message)) $message = isset(StatusCode::$status_code[$statusCode]) ? StatusCode::$status_code[$statusCode] :StatusCode::$status_code[StatusCode::COMMON_UNKNOWN];
-        parent::__construct($message, $code, $previous);
+        parent::__construct('ERROR_TINYMENG_TOOL: '.$message, $code, $previous);
     }
 
     public function getHeaders()
