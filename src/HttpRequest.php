@@ -16,10 +16,10 @@ class HttpRequest
      * 例: 127.0.0.1:8080
      *
      * 上传图片请求事例:
-        $data = [
-            'file' => new \CURLFile($_FILES['file']['tmp_name'],$_FILES['file']['type'],$_FILES['file']['name']),
-        ];
-        \tinymeng\tools\HttpRequest::httpPost($url,$data)
+    $data = [
+    'file' => new \CURLFile($_FILES['file']['tmp_name'],$_FILES['file']['type'],$_FILES['file']['name']),
+    ];
+    \tinymeng\tools\HttpRequest::httpPost($url,$data)
      */
 
     /**
@@ -152,9 +152,13 @@ class HttpRequest
 
         /** 验证网络请求状态 */
         if (intval($info["http_code"]) === 0) {
-            throw new TinymengException('[httpGet]: GET request was aborted ! Request url :' . $url );
+            throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                '[httpGet]: GET request was aborted ! Request url :' . $url
+            );
         }elseif(intval($info["http_code"]) != $http_code){
-            throw new TinymengException('[httpGet]: GET request was aborted ! Request url :' . $url .' ,return code : '.$info["http_code"] .' ,return content : '.$content);
+            throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                '[httpGet]: GET request was aborted ! Request url :' . $url .' ,return code : '.$info["http_code"] .' ,return content : '.$content
+            );
         } else {
             return $content;
         }
