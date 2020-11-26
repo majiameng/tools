@@ -35,6 +35,21 @@ class HttpRequest
      */
     static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy='', $http_code = 200)
     {
+        //参数检测,class或者array进行http_build_query
+        if(!empty($param) && is_array($param)){
+            $flag = false;
+            foreach ($param as $value){
+                //判断参数是否是一个类 或者 是一个数组
+                if(class_exists($value) || is_array($value)){
+                    $flag = true;
+                    break;
+                }
+            }
+            if($flag == true){
+                $param = http_build_query($param);
+            }
+        }
+
         $curl = curl_init();
 
         /** 设置请求链接 */
@@ -44,7 +59,7 @@ class HttpRequest
 
         /** 设置请求参数 */
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, ($param));
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $param);
 
         /** 设置请求headers */
         if(empty($httpHeaders)){
