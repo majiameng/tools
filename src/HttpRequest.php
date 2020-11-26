@@ -40,7 +40,7 @@ class HttpRequest
             $flag = false;
             foreach ($param as $value){
                 //判断参数是否是一个类 或者 是一个数组
-                if(class_exists($value) || is_array($value)){
+                if(is_array($value)){
                     $flag = true;
                     break;
                 }
