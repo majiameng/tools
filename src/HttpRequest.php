@@ -35,7 +35,7 @@ class HttpRequest
      */
     static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy='', $http_code = 200)
     {
-        //参数检测,class或者array进行http_build_query
+        /** 参数检测,class或者array进行http_build_query */
         if(!empty($param) && is_array($param)){
             $flag = false;
             foreach ($param as $value){
