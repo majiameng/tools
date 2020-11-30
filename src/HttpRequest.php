@@ -64,12 +64,14 @@ class HttpRequest
         /** 设置请求headers */
         if(empty($httpHeaders)){
             $httpHeaders = array(
-                "UserModel-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36",
+                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
             );
         }
         if (is_array($httpHeaders)){
             curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
         }
+        /** gzip压缩 */
+        curl_setopt($curl, CURLOPT_ACCEPT_ENCODING, "gzip,deflate");
 
         /** 不验证https证书和hosts */
         if (stripos($url, "https://") !== FALSE) {
@@ -151,12 +153,14 @@ class HttpRequest
         /** 设置请求headers */
         if(empty($httpHeaders)){
             $httpHeaders = array(
-                "UserModel-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36",
+                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
             );
         }
         if (is_array($httpHeaders)){
             curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
         }
+        /** gzip压缩 */
+        curl_setopt($curl, CURLOPT_ACCEPT_ENCODING, "gzip,deflate");
 
         /** 请求 */
         $content = curl_exec($curl);
