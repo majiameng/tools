@@ -41,9 +41,9 @@ use tinymeng\tools\HttpRequest;
 
 > 中文转拼音类库
 
-```php
-
+```
 <?php
+
 use tinymeng\tools\ChineseChar;
     /**
      * Description:  获取字符串的首字母
@@ -105,6 +105,15 @@ var_dump($string);//Decrypted content
 
 ```
 
+
+#### 2.4 异步执行
+```
+<?php
+use tinymeng\tools\async\AsyncHook;
+
+//异步执行
+AsyncHook::hook([CommonService::class, 'sendMsgEmailTinymeng'], [$content,$title,$address]);
+```
 
 ### 版本修复
 

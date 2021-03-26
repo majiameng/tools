@@ -35,12 +35,12 @@ class HttpRequest
      */
     static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy='', $http_code = 200)
     {
-        /** 参数检测,class或者array进行http_build_query */
+        /** 参数检测,object或者array进行http_build_query */
         if(!empty($param) && is_array($param)){
             $flag = false;
             foreach ($param as $value){
-                //判断参数是否是一个类 或者 是一个数组
-                if(is_array($value) || (is_string($value) && class_exists($value))){
+                //判断参数是否是一个对象 或者 是一个数组
+                if(is_array($value) || (is_string($value) && is_object($value))){
                     $flag = true;
                     break;
                 }
