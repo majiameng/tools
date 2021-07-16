@@ -153,6 +153,7 @@ class File{
     }
 
     /**
+     * 给目录赋值权限
      * @Author: TinyMeng <666@majiameng.com>
      * @param $file_name
      * @param int $mode
@@ -161,5 +162,36 @@ class File{
         if (file_exists($file_name)){
             @chmod($file_name,$mode);
         }
+    }
+
+    /**
+     * 文件移动
+     * @Author: TinyMeng <666@majiameng.com>
+     * @param string $file old文件
+     * @param string $new_file 新文件
+     * @return bool
+     */
+    static public function move(string $file, string $new_file): bool
+    {
+        //文件是否存在
+        if(file_exists($file)){
+            return false;
+        }
+
+        //新文件目录
+        if(strrpos($new_file,'/')){
+            //获取文件夹路径
+            $dir_name = substr($new_file,0,strrpos($new_file,'/'));
+            //创建文件夹
+            self::mkdir($dir_name);
+        }
+
+        //添加文件权限
+        self::chmod($dir_name);
+
+        copy($file,$new_file); //拷贝到新目录
+        unlink($file); //删除旧目录下的文件
+
+        return true;
     }
 }
