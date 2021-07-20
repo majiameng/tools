@@ -174,7 +174,7 @@ class File{
     static public function move(string $file, string $new_file): bool
     {
         //文件是否存在
-        if(file_exists($file)){
+        if(!file_exists($file)){
             return false;
         }
 
