@@ -117,6 +117,12 @@ AsyncHook::hook([CommonService::class, 'sendMsgEmailTinymeng'], [$content,$title
 
 ### 版本修复
 
+2021-07-21 更新以下功能
+Tag v1.1.6
+```
+1.添加file move功能
+```
+
 2020-11-12 更新以下功能
 Tag v1.1.3
 ```
