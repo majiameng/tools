@@ -117,6 +117,13 @@ AsyncHook::hook([CommonService::class, 'sendMsgEmailTinymeng'], [$content,$title
 
 ### 版本修复
 
+2022-03-09 更新以下功能
+Tag v1.2.0
+```
+1.修改获取中文文字拼音类库bug
+```
+
+
 2021-07-21 更新以下功能
 Tag v1.1.6
 ```
