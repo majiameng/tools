@@ -122,13 +122,26 @@ class Tool{
     }
 
     /**
-     * Description:  是否在微信浏览器内
+     * Description:  判断是否微信内置浏览器访问
      * Author: JiaMeng <666@majiameng.com>
      * Updater:
      * @return bool
      */
     public static function isWeiXin() {
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Description:  判断是否支付宝内置浏览器访问
+     * Author: JiaMeng <666@majiameng.com>
+     * Updater:
+     * @return bool
+     */
+    public static function isAliPay() {
+        if (strpos($_SERVER['HTTP_USER_AGENT'], 'Alipay') !== false) {
             return true;
         }
         return false;
