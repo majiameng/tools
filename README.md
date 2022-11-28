@@ -1,5 +1,20 @@
-PHP Tools Class
-===============
+<h1 align="center">tinymeng/tools</h1>
+<p align="center">
+<a href="https://scrutinizer-ci.com/g/majiameng/tools/?branch=master"><img src="https://scrutinizer-ci.com/g/majiameng/tools/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
+<a href="https://scrutinizer-ci.com/g/majiameng/tools/build-status/master"><img src="https://scrutinizer-ci.com/g/majiameng/tools/badges/build.png?b=master" alt="Build Status"></a>
+<a href="https://packagist.org/packages/tinymeng/tools"><img src="https://poser.pugx.org/tinymeng/tools/v/stable" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/tinymeng/tools"><img src="https://poser.pugx.org/tinymeng/tools/downloads" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/tinymeng/tools"><img src="https://poser.pugx.org/tinymeng/tools/v/unstable" alt="Latest Unstable Version"></a>
+<a href="https://packagist.org/packages/tinymeng/tools"><img src="https://poser.pugx.org/tinymeng/tools/license" alt="License"></a>
+</p>
+
+为自己其他组件创造共有的轮子，一些简单使用的小工具。
+
+欢迎 Star，欢迎 PR！
+
+> 大家如果有问题要交流，就发在这里吧： [Tools](https://github.com/majiameng/tools/issues/1) 交流 或发邮件 666@majiameng.com
+
+
 
 # PHP Tools Class
 
@@ -135,3 +150,6 @@ Tag v1.1.3
 ```
 1.修改TinymengException异常类
 ```
+
+
+> 大家如果有问题要交流，就发在这里吧： [Tools](https://github.com/majiameng/tools/issues/1) 交流 或发邮件 666@majiameng.com
