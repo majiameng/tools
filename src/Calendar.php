@@ -218,7 +218,7 @@ class Calendar
     {
         $date = $this->makeDate("{$year}-{$month}-{$day}");
         $lunar = $this->solar2lunar($year, $month, $day, $hour);
-        $week = abs($date->format('w')); // 0 ~ 6 修正 星期七 为 星期日
+        $week = abs((int)$date->format('w')); // 0 ~ 6 修正 星期七 为 星期日
 
         return array_merge(
             $lunar,
@@ -434,7 +434,7 @@ class Calendar
         if ($no < 1 || $no > 24) {
             return -1;
         }
-        $solarTermsOfYear = array_map('hexdec', str_split($this->solarTerms[$year - 1900], 5));
+        $solarTermsOfYear = array_map('hexdec', (array)str_split($this->solarTerms[$year - 1900], 5));
         $positions = [
             0 => [0, 1],
             1 => [1, 2],
@@ -598,7 +598,7 @@ class Calendar
             throw new InvalidArgumentException("不支持的日期:{$year}-{$month}-{$day}");
         }
 
-        $offset = $this->dateDiff($date, '1900-01-31')->days;
+        $offset = (int)$this->dateDiff($date, '1900-01-31')->days;
 
         for ($i = 1900; $i < 2101 && $offset > 0; ++$i) {
             $daysOfYear = $this->daysOfYear($i);
@@ -795,6 +795,7 @@ class Calendar
      *
      * @param string|\DateTime $date1
      * @param string|\DateTime $date2
+     *
      * @return bool|\DateInterval
      */
     public function dateDiff($date1, $date2)
@@ -816,9 +817,10 @@ class Calendar
      * @param array $lunar1
      * @param array $lunar2
      * @param bool  $absolute
+     *
      * @return int
      */
-    public function diffInYears(array $lunar1,array $lunar2,bool $absolute = true)
+    public function diffInYears($lunar1, $lunar2, $absolute = true)
     {
         $solar1 =
             $this->lunar2solar($lunar1['lunar_year'], $lunar1['lunar_month'], $lunar1['lunar_day'], $lunar1['is_leap']);
@@ -859,7 +861,7 @@ class Calendar
      * @param bool $absolute
      * @return float|int|mixed
      */
-    public function diffInMonths(array $lunar1,array $lunar2,bool $absolute = true)
+    public function diffInMonths($lunar1, $lunar2, $absolute = true)
     {
         $solar1 =
             $this->lunar2solar($lunar1['lunar_year'], $lunar1['lunar_month'], $lunar1['lunar_day'], $lunar1['is_leap']);
@@ -918,7 +920,7 @@ class Calendar
      *
      * @return int
      */
-    public function diffInDays(array $lunar1,array $lunar2,bool $absolute = true)
+    public function diffInDays($lunar1, $lunar2, $absolute = true)
     {
         $solar1 =
             $this->lunar2solar($lunar1['lunar_year'], $lunar1['lunar_month'], $lunar1['lunar_day'], $lunar1['is_leap']);
@@ -940,7 +942,7 @@ class Calendar
      *
      * @return array
      */
-    public function addYears(array $lunar,int $value = 1,bool $overFlow = true)
+    public function addYears($lunar, $value = 1, $overFlow = true)
     {
         $newYear = $lunar['lunar_year'] + $value;
         $newMonth = $lunar['lunar_month'];
@@ -1115,7 +1117,7 @@ class Calendar
         $date = $this->makeDate("{$solar['solar_year']}-{$solar['solar_month']}-{$solar['solar_day']}");
         $date->modify($value.' day');
 
-        return $this->solar2lunar($date->format('Y'), $date->format('m'), $date->format('d'));
+        return $this->solar2lunar((int)$date->format('Y'), (int)$date->format('m'), (int)$date->format('d'));
     }
 
     /**
