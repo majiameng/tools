@@ -149,26 +149,7 @@ $result = $calendar->lunar(2017, 4, 10); // 阴历
 $result = $calendar->solar(2017, 5, 5, 23) // 阳历，带 $hour 参数
 ```
 
-### 版本修复
-
-2022-03-09 更新以下功能
-Tag v1.2.0
-```
-1.修改获取中文文字拼音类库bug
-```
-
-
-2021-07-21 更新以下功能
-Tag v1.1.6
-```
-1.添加file move功能
-```
-
-2020-11-12 更新以下功能
-Tag v1.1.3
-```
-1.修改TinymengException异常类
-```
+#### 查看 [tools升级日志](https://github.com/majiameng/tools/blob/master/Update_README.md)
 
 
 > 大家如果有问题要交流，就发在这里吧： [Tools](https://github.com/majiameng/tools/issues/1) 交流 或发邮件 666@majiameng.com
