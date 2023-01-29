@@ -23,9 +23,14 @@
 > composer require tinymeng/tools  -vvv
 
 
-* HTTP请求工具类
-* 中英文装换工具类
-* 字符串加密解密算法
+* 2.1 HTTP请求工具类
+* 2.2 中英文装换工具类
+* 2.3 字符串加密解密算法
+* 2.4 异步执行
+* 2.5 :date: 中国农历（阴历）与阳历（公历）转换与查询工具
+* 文件日志读写
+* 字符串处理
+* 递归数组处理
 
 #### 2.1.HttpRequest Class
 > Use curl implementation request,Support uploading pictures and custom header !
@@ -56,8 +61,7 @@ use tinymeng\tools\HttpRequest;
 
 > 中文转拼音类库
 
-```
-<?php
+```php
 
 use tinymeng\tools\ChineseChar;
     /**
@@ -103,7 +107,6 @@ use tinymeng\tools\ChineseChar;
 > 字符串加密解密算法 String Encryption and Decryption Algorithms
 
 ```php
-<?php
 use tinymeng\tools\Encryption;
 $key = 'tinymeng';//secret key                    
 
@@ -122,12 +125,28 @@ var_dump($string);//Decrypted content
 
 
 #### 2.4 异步执行
-```
-<?php
+```php
 use tinymeng\tools\async\AsyncHook;
 
 //异步执行
 AsyncHook::hook([CommonService::class, 'sendMsgEmailTinymeng'], [$content,$title,$address]);
+```
+
+
+#### 2.5 :date: 中国农历（阴历）与阳历（公历）转换与查询工具
+
+- 详细文档请查看 [国农历（阴历）与阳历（公历）转换](https://github.com/majiameng/tools/blob/master/Chinese_Calendar_README.md)  
+
+```php
+use tinymeng\tools\Calendar;
+
+date_default_timezone_set('PRC'); 
+
+$calendar = new Calendar();
+
+$result = $calendar->solar(2017, 5, 5); // 阳历
+$result = $calendar->lunar(2017, 4, 10); // 阴历
+$result = $calendar->solar(2017, 5, 5, 23) // 阳历，带 $hour 参数
 ```
 
 ### 版本修复
