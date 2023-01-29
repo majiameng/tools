@@ -795,7 +795,6 @@ class Calendar
      *
      * @param string|\DateTime $date1
      * @param string|\DateTime $date2
-     *
      * @return bool|\DateInterval
      */
     public function dateDiff($date1, $date2)
@@ -817,10 +816,9 @@ class Calendar
      * @param array $lunar1
      * @param array $lunar2
      * @param bool  $absolute
-     *
      * @return int
      */
-    public function diffInYears($lunar1, $lunar2, $absolute = true)
+    public function diffInYears(array $lunar1,array $lunar2,bool $absolute = true)
     {
         $solar1 =
             $this->lunar2solar($lunar1['lunar_year'], $lunar1['lunar_month'], $lunar1['lunar_day'], $lunar1['is_leap']);
@@ -856,14 +854,12 @@ class Calendar
 
     /**
      * 获取两个日期之间以月为单位的距离.
-     *
      * @param array $lunar1
      * @param array $lunar2
-     * @param bool  $absolute
-     *
-     * @return int
+     * @param bool $absolute
+     * @return float|int|mixed
      */
-    public function diffInMonths($lunar1, $lunar2, $absolute = true)
+    public function diffInMonths(array $lunar1,array $lunar2,bool $absolute = true)
     {
         $solar1 =
             $this->lunar2solar($lunar1['lunar_year'], $lunar1['lunar_month'], $lunar1['lunar_day'], $lunar1['is_leap']);
@@ -922,7 +918,7 @@ class Calendar
      *
      * @return int
      */
-    public function diffInDays($lunar1, $lunar2, $absolute = true)
+    public function diffInDays(array $lunar1,array $lunar2,bool $absolute = true)
     {
         $solar1 =
             $this->lunar2solar($lunar1['lunar_year'], $lunar1['lunar_month'], $lunar1['lunar_day'], $lunar1['is_leap']);
@@ -944,7 +940,7 @@ class Calendar
      *
      * @return array
      */
-    public function addYears($lunar, $value = 1, $overFlow = true)
+    public function addYears(array $lunar,int $value = 1,bool $overFlow = true)
     {
         $newYear = $lunar['lunar_year'] + $value;
         $newMonth = $lunar['lunar_month'];
