@@ -33,7 +33,7 @@ class HttpRequest
      * @return mixed
      * @throws \Exception
      */
-    static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy='', $http_code = 200)
+    static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy='', $http_code = null)
     {
         /** 参数检测,object或者array进行http_build_query */
         if(!empty($param) && is_array($param)){
@@ -95,16 +95,20 @@ class HttpRequest
         /** 关闭请求资源 */
         curl_close($curl);
 
-        /** 验证网络请求状态 */
-        if (intval($info["http_code"]) === 0) {
-            throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
-                '[httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true)
-            );
-        }elseif(intval($info["http_code"]) != $http_code){
-            throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
-                '[httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true).' ,return code : '.$info["http_code"] .' ,return content : '.$content
-            );
-        } else {
+        if($http_code != null){
+            /** 验证网络请求状态 */
+            if (intval($info["http_code"]) === 0) {
+                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                    '[httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true)
+                );
+            }elseif(intval($info["http_code"]) != $http_code){
+                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                    '[httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true).' ,return code : '.$info["http_code"] .' ,return content : '.$content
+                );
+            } else {
+                return $content;
+            }
+        }else{
             return $content;
         }
     }
@@ -170,15 +174,19 @@ class HttpRequest
         curl_close($curl);
 
         /** 验证网络请求状态 */
-        if (intval($info["http_code"]) === 0) {
-            throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
-                '[httpGet]: GET request was aborted ! Request url :' . $url
-            );
-        }elseif(intval($info["http_code"]) != $http_code){
-            throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
-                '[httpGet]: GET request was aborted ! Request url :' . $url .' ,return code : '.$info["http_code"] .' ,return content : '.$content
-            );
-        } else {
+        if($http_code != null){
+            if (intval($info["http_code"]) === 0) {
+                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                    '[httpGet]: GET request was aborted ! Request url :' . $url
+                );
+            }elseif(intval($info["http_code"]) != $http_code){
+                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                    '[httpGet]: GET request was aborted ! Request url :' . $url .' ,return code : '.$info["http_code"] .' ,return content : '.$content
+                );
+            } else {
+                return $content;
+            }
+        }else{
             return $content;
         }
     }
