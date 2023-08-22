@@ -167,23 +167,3 @@ class Rsa
     }
 
 }
-
-/**
-    $privkeypass = '95920180927';//私钥密码
-    $rsa = new Rsa('/data/majiameng.com/public/rsa/',$privkeypass);
-
-    //私钥加密，公钥解密
-    echo "待加密数据：segmentfault.com\n";
-    $pre = $rsa->privEncrypt("segmentfault.com");
-    echo "加密后的密文:\n" . $pre . "\n";
-    $pud = $rsa->pubDecrypt($pre);
-    echo "解密后数据:" . $pud . "\n";
-
-
-    //公钥加密，私钥解密
-    echo "待加密数据：segmentfault.com\n";
-    $pue = $rsa->pubEncrypt("segmentfault.com");
-    echo "加密后的密文:\n" . $pue . "\n";
-    $prd = $rsa->privDecrypt($pue);
-    echo "解密后数据:" . $prd;
- */
