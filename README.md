@@ -28,9 +28,9 @@
 * 2.3 字符串加密解密算法
 * 2.4 异步执行
 * 2.5 :date: 中国农历（阴历）与阳历（公历）转换与查询工具
-* 文件日志读写
-* 字符串处理
-* 递归数组处理
+* 2.6 文件日志读写
+* 2.7 字符串处理
+* 2.8 递归数组处理
 
 #### 2.1.HttpRequest Class
 > Use curl implementation request,Support uploading pictures and custom header !
@@ -149,7 +149,142 @@ $result = $calendar->lunar(2017, 4, 10); // 阴历
 $result = $calendar->solar(2017, 5, 5, 23) // 阳历，带 $hour 参数
 ```
 
+#### 2.6 文件日志读写
+
+```php
+use tinymeng\tools\File;
+
+$data = [
+    'name'=>'111'
+];
+File::writeLog($data);
+File::writeLog("this is word","log");
+```
+
+error-20210822.log
+```
+2021-08-22 16:23:43 : {"name":"111"}
+```
+
+log-20210822.log
+```
+2021-08-22 16:23:43 : this is word
+```
+
+#### 2.7 字符串处理
+
+* 手写字母大写 uFirst
+* 生成随机字符串 generateRandomString
+* 获取唯一设备号 createChannelId
+* 获取md5中16位小写 md5Bit16
+* 获取时间戳(13位精确到豪妙) millisecond
+* 是否包含中文 isContainChinese
+* 是否全是中文 isAllChinese
+* 判断手机号码 isMobile
+* 科学计数法转化正常数值输出（如 2.1E-5） sctonum
+* 自动转换字符集 支持数组转换 autoCharset
+* 压缩html代码 compressHtml
+* html标签替换成特定小程序标签 htmlReplaceXcx
+* 过滤标点符号 filterPunctuation
+* 过滤html标签 stripTags
+
+#### 2.8 递归数组处理
+```
+use tinymeng\tools\Tool;
+
+$result = [
+    [
+        'id'=>1,
+        'pid'=>0,
+        'name'=>"账户管理",
+    ],
+    [
+        'id'=>2,
+        'pid'=>1,
+        'name'=>"管理员管理",
+    ],
+    [
+        'id'=>3,
+        'pid'=>1,
+        'name'=>"用户管理",
+    ],
+    [
+        'id'=>4,
+        'pid'=>2,
+        'name'=>"添加管理员",
+    ],
+    [
+        'id'=>5,
+        'pid'=>2,
+        'name'=>"删除管理员",
+    ],
+];
+$result = Tool::getTreeStructure($result,'id','pid');
+var_dump($result);
+```
+打印结果
+```
+array(1) {
+  [0]=>
+  array(4) {
+    ["id"]=>
+    int(1)
+    ["pid"]=>
+    int(0)
+    ["name"]=>
+    string(12) "账户管理"
+    ["child"]=>
+    array(2) {
+      [0]=>
+      array(4) {
+        ["id"]=>
+        int(2)
+        ["pid"]=>
+        int(1)
+        ["name"]=>
+        string(15) "管理员管理"
+        ["child"]=>
+        array(2) {
+          [0]=>
+          array(3) {
+            ["id"]=>
+            int(4)
+            ["pid"]=>
+            int(2)
+            ["name"]=>
+            string(15) "添加管理员"
+          }
+          [1]=>
+          array(3) {
+            ["id"]=>
+            int(5)
+            ["pid"]=>
+            int(2)
+            ["name"]=>
+            string(15) "删除管理员"
+          }
+        }
+      }
+      [1]=>
+      array(3) {
+        ["id"]=>
+        int(3)
+        ["pid"]=>
+        int(1)
+        ["name"]=>
+        string(12) "用户管理"
+      }
+    }
+  }
+}
+```
+
 #### 查看 [tools升级日志](https://github.com/majiameng/tools/blob/master/Update_README.md)
 
 
 > 大家如果有问题要交流，就发在这里吧： [Tools](https://github.com/majiameng/tools/issues/1) 交流 或发邮件 666@majiameng.com
+
+
+#### [PHP Oauth2登录](https://github.com/majiameng/OAuth2)
+
+集成了许多第三方登录界面，包括QQ登录、微信登录、新浪登录、github登录、支付宝登录、百度登录、抖音登录、GitLab、Naver、Line、codeing、csdn、gitee等，陆续增加ing
