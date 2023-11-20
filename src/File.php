@@ -20,7 +20,8 @@ class File{
         if(!is_string($message)){
             $message = json_encode($message);
         }
-        $message = date('Y-m-d H:i:s').' : '.$message.PHP_EOL;
+        list($msec, $sec) = explode(' ', microtime());
+        $message = date('Y-m-d H:i:s',$sec).'.'.str_replace('0.','',$msec).' : '.$message.PHP_EOL;
         if($exception && $exception instanceof \Exception){
             $message .= ' File: '.$exception->getFile().' ,Line: '.$exception->getLine().' ,Message: '.$exception->getMessage();
         }
