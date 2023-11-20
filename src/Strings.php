@@ -68,13 +68,15 @@ class Strings
     /**
      * 获取时间戳(13位精确到豪妙)
      * @Author: TinyMeng <666@majiameng.com>
-     * @param null $time
+     * @param null|int $time
      * @return int
      */
     static public function millisecond($time = null) :int{
         if(empty($time)){
             list($msec, $sec) = explode(' ', microtime());
             $millisecond = (int)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
+        }elseif(is_numeric($time) && strlen((string)$time)==10){
+            $millisecond = (string)$time."000";
         }else{
             $millisecond = strtotime($time)."000";
         }
@@ -201,7 +203,7 @@ class Strings
      * @return string
      */
     public static function getTime($date,$is_timestamp=false):string {
-        if($is_timestamp == true){
+        if($is_timestamp === true){
             $time = $date;
         }else{
             $time = strtotime($date);//时间转换为时间戳
@@ -227,7 +229,7 @@ class Strings
             return $days.'天前';
         }
         if($days <= 365){
-            return date('m-d',$time);
+            return date('m-d',/** @scrutinizer ignore-type */ $time);
         }
         return date('Y-m-d',$time);
     }
