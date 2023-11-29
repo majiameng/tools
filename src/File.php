@@ -20,8 +20,7 @@ class File{
         if(!is_string($message)){
             $message = json_encode($message);
         }
-        list($msec, $sec) = explode(' ', microtime());
-        $message = date('Y-m-d H:i:s',$sec).'.'.str_replace('0.','',$msec).' : '.$message.PHP_EOL;
+        $message = date('Y-m-d H:i:s').' : '.$message.PHP_EOL;
         if($exception && $exception instanceof \Exception){
             $message .= ' File: '.$exception->getFile().' ,Line: '.$exception->getLine().' ,Message: '.$exception->getMessage();
         }
@@ -100,7 +99,6 @@ class File{
         }
     }
 
-
     /**
      * Name: 创建文件夹
      * Author: Tinymeng <666@majiameng.com>
@@ -112,6 +110,8 @@ class File{
             if(!mkdir($dir_name, 0755, true)){
                 die('创建缓存文件夹"'.$dir_name.'"失败!');
             }
+            //添加文件权限
+            self::chmod($dir_name);
         }
         return true;
     }
@@ -166,6 +166,24 @@ class File{
     }
 
     /**
+     * 获取目录文件
+     * @Author: TinyMeng <666@majiameng.com>
+     * @param $path
+     * dirname()可以的当前文件目录
+     * @return array
+     */
+    static public function scandir($path){
+        $filename = scandir($path);
+        $result = array();
+        foreach($filename as $k=>$v){
+            // 跳过两个特殊目录   continue跳出循环
+            if($v=="." || $v==".."){continue;}
+            $result[] = $v;
+        }
+        return $result;
+    }
+
+    /**
      * 文件移动
      * @Author: TinyMeng <666@majiameng.com>
      * @param string $file old文件
@@ -185,10 +203,9 @@ class File{
             $dir_name = substr($new_file,0,strrpos($new_file,'/'));
             //创建文件夹
             self::mkdir($dir_name);
+            //添加文件权限
+            self::chmod($dir_name);
         }
-
-        //添加文件权限
-        self::chmod($dir_name);
 
         copy($file,$new_file); //拷贝到新目录
         unlink($file); //删除旧目录下的文件
