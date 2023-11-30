@@ -49,9 +49,9 @@ class File{
      * http://blog.majiameng.com/article/2724.html
      */
     static public function filePutContents(string $file_name,string $content,bool $file_append = false){
-        if(strrpos($file_name,'/')){
+        if(strrpos($file_name,DIRECTORY_SEPARATOR)){
             //获取文件夹路径
-            $dir_name = substr($file_name,0,strrpos($file_name,'/'));
+            $dir_name = substr($file_name,0,strrpos($file_name,DIRECTORY_SEPARATOR));
             //创建文件夹
             self::mkdir($dir_name);
         }
@@ -77,9 +77,9 @@ class File{
      * http://blog.majiameng.com/article/2724.html
      */
     static public function fWrite(string $file_name,string $content,bool $file_append = false){
-        if(strrpos($file_name,'/')){
+        if(strrpos($file_name,DIRECTORY_SEPARATOR)){
             //获取文件夹路径
-            $dir_name = substr($file_name,0,strrpos($file_name,'/'));
+            $dir_name = substr($file_name,0,strrpos($file_name,DIRECTORY_SEPARATOR));
             //创建文件夹
             self::mkdir($dir_name);
         }
@@ -172,7 +172,7 @@ class File{
      * dirname()可以的当前文件目录
      * @return array
      */
-    static public function scandir($path){
+    static public function scanDir($path){
         $filename = scandir($path);
         $result = array();
         foreach($filename as $k=>$v){
@@ -198,9 +198,9 @@ class File{
         }
 
         //新文件目录
-        if(strrpos($new_file,'/')){
+        if(strrpos($new_file,DIRECTORY_SEPARATOR)){
             //获取文件夹路径
-            $dir_name = substr($new_file,0,strrpos($new_file,'/'));
+            $dir_name = substr($new_file,0,strrpos($new_file,DIRECTORY_SEPARATOR));
             //创建文件夹
             self::mkdir($dir_name);
             //添加文件权限
