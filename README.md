@@ -8,16 +8,18 @@
 <a href="https://packagist.org/packages/tinymeng/tools"><img src="https://poser.pugx.org/tinymeng/tools/license" alt="License"></a>
 </p>
 
-为自己其他组件创造共有的轮子，一些简单使用的小工具。
+Create shared wheels for your other components, some easy-to-use small tools。
 
-欢迎 Star，欢迎 PR！
+Welcome Star, welcome PR！
 
-> 大家如果有问题要交流，就发在这里吧： [Tools](https://github.com/majiameng/tools/issues/1) 交流 或发邮件 666@majiameng.com
+> If you have any questions to discuss, just post them here： [Tools](https://github.com/majiameng/tools/issues/1) Communicate or send emails 666@majiameng.com
+
 
 
 # PHP Tools Class
 
-## 1.安装
+
+## 1.Install
 > composer require tinymeng/tools  -vvv
 
 
