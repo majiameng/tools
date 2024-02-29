@@ -75,7 +75,7 @@ class ChineseChar
      */
     static public function getChineseChar($string, $isOne = false, $upper = false)
     {
-        global $spellArray;
+        $spellArray = self::getArray();
         $str_arr = self::utf8_str_split($string, 1); //将字符串拆分成数组
         $result = array();
         foreach ($str_arr as $char) {
