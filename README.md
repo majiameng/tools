@@ -39,7 +39,7 @@
 ## You can find the tinymeng/tools documentation on the website. Check out the Getting Started page for a quick overview.
 
 * [Wiki Home](https://github.com/majiameng/tools/wiki)
-* [中文文档](https://github.com/majiameng/OAuth2/wiki/zh-cn-Home)
+* [中文文档](https://github.com/majiameng/tools/wiki/zh-cn-Home)
 
 #### 2.1.HttpRequest Class
 > Use curl implementation request,Support uploading pictures and custom header !
