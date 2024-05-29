@@ -40,7 +40,7 @@ Welcome Star, welcome PR！
 * [Wiki Home](https://github.com/majiameng/tools/wiki)
 * [中文文档](https://github.com/majiameng/tools/wiki/zh-cn-Home)
 
-#### 查看 [tools升级日志](https://github.com/majiameng/tools/blob/master/Update_README.md)
+#### 查看 [tools升级日志](https://github.com/majiameng/tools/wiki/zh-cn-Update-log)
 
 
 > 大家如果有问题要交流，就发在这里吧： [Tools](https://github.com/majiameng/tools/issues/1) 交流 或发邮件 666@majiameng.com

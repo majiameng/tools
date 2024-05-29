@@ -39,7 +39,7 @@ class ChineseChar
     static public function getChineseFirstChar($string, $isOne = false, $upper = false)
     {
         $spellArray = self::getArray();
-        $str_arr = self::utf8_str_split($string, 1); //将字符串拆分成数组
+        $str_arr = self::utf8StrSplit($string, 1); //将字符串拆分成数组
 
         if (preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $str_arr[0])) { //判断是否是汉字
             $chinese = $spellArray[$str_arr[0]];
@@ -76,7 +76,7 @@ class ChineseChar
     static public function getChineseChar($string, $isOne = false, $upper = false)
     {
         $spellArray = self::getArray();
-        $str_arr = self::utf8_str_split($string, 1); //将字符串拆分成数组
+        $str_arr = self::utf8StrSplit($string, 1); //将字符串拆分成数组
         $result = array();
         foreach ($str_arr as $char) {
             if (preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $char)) {
@@ -99,7 +99,7 @@ class ChineseChar
      * @param int $split_len
      * @return array|bool
      */
-    private static function utf8_str_split($str, $split_len = 1)
+    private static function utf8StrSplit($str, $split_len = 1)
     {
         if (!preg_match('/^[0-9]+$/', $split_len) || $split_len < 1) {
             return false;
