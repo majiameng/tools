@@ -10,7 +10,7 @@ namespace tinymeng\tools;
 
 use ZipArchive;
 
-class Zip {
+class ZipTool {
 
 
     public $fileName;
