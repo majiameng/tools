@@ -6,7 +6,7 @@ namespace tinymeng\tools;
  * @Author: TinyMeng <666@majiameng.com>
  * @Created: 2018/11/26
  */
-class Strings
+class StringTool
 {
     /**
      * Function Name: 手写字母大写

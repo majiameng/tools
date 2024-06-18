@@ -5,7 +5,7 @@ namespace tinymeng\tools;
  *  logFilePath: /storage/tinymeng/log/
  */
 define('logFilePath',dirname(dirname(dirname(dirname(__DIR__)))).DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'tinymeng'.DIRECTORY_SEPARATOR.'log'.DIRECTORY_SEPARATOR);
-class File{
+class FileTool{
 
     /**
      * Name: writeLog

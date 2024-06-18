@@ -11,24 +11,6 @@ namespace tinymeng\tools;
 class Tool{
 
     /**
-     * Description:  对象到数组转换
-     * Author: JiaMeng <666@majiameng.com>
-     * Updater:
-     * @param $obj
-     * @return array
-     */
-    private function objectToArray($obj){
-        if(!is_object($obj) && !is_array($obj)) {
-            return $obj;
-        }
-        $arr = array();
-        foreach($obj as $k => $v){
-            $arr[$k] = $this->objectToArray($v);
-        }
-        return $arr;
-    }
-
-    /**
      * Description:  获取ip
      * Author: JiaMeng <666@majiameng.com>
      * Updater:
@@ -145,50 +127,6 @@ class Tool{
             return true;
         }
         return false;
-    }
-
-    /**
-     * Description:  获取菜单树结构
-     * Author: JiaMeng <666@majiameng.com>
-     * Updater:
-     * @param array $list 数据list
-     * @param string $filed 主键字段
-     * @param string $parent_filed 父节点字段
-     * @param int $parent_id 父id值
-     * @return array
-     */
-    public static function getTreeStructure($list,$filed='id',$parent_filed='pid',$parent_id=0){
-        $result = array();
-        if(!empty($list)){
-            foreach($list as $key=>$val){
-                if($val[$parent_filed] == $parent_id){
-                    $val['child'] = self::getTreeStructure($list,$filed,$parent_filed,$val[$filed]);
-                    if(empty($val['child'])){
-                        unset($val['child']);
-                    }
-                    $result[] = $val;
-                }
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * 空数组转为object
-     * 给安卓出接口时部分要求[]返回{}(数组返回字典类型)
-     * @Author: TinyMeng <666@majiameng.com>
-     * @param $data
-     */
-    static public function nullArrayToObject(&$data){
-        foreach ($data as $key=>&$val){
-            if(is_array($val)){
-                if(empty($val)){
-                    settype($val,'object');
-                }else{
-                    self::nullArrayToObject($val);
-                }
-            }
-        }
     }
 
 }

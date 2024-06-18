@@ -7,7 +7,7 @@ namespace tinymeng\tools;
  * Author: JiaMeng <666@majiameng.com>
  * Class Rsa
  */
-class Rsa
+class RsaTool
 {
 
     private $rsaPath = './';//公钥证书路径
