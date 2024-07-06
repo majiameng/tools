@@ -15,6 +15,9 @@ class UrlTool{
         if (!$host) {
             return '';
         }
+        if (in_array($host,['127.0.0.1','localhost'])) {
+            return '';
+        }
 
         // 假设主域名至少有两个部分（例如：example.com），并且不包含子域名
         $parts = explode('.', $host);
