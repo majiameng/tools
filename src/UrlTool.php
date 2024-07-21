@@ -8,10 +8,15 @@ class UrlTool{
     /**
      * 获取url中主域名
      * @param $url
-     * @return array|int|string
+     * @return string
      */
-    static function getMainDomain($url) {
+    function getMainDomain($url) {
+        $url = strtolower($url);//首先转成小写
         $host = parse_url($url, PHP_URL_HOST); // 获取host部分
+        if(empty($host)){
+            $url = "https://".$url;
+            $host = parse_url($url,PHP_URL_HOST);
+        }
         if (!$host) {
             return '';
         }
@@ -26,15 +31,16 @@ class UrlTool{
         /*
          *  通常情况下，主域名由最后两个部分组成
          *  但这可能不适用于所有情况，特别是当TLD是.co.uk这样的
+         *  判断是否是双后缀aaa.com.cn
          */
-        if ($count > 2) {
-            return implode('.', array_slice($parts, -2)); // 返回最后两个部分的组合
-        } elseif ($count == 2) {
+        $preg = '/[\w].+\.(com|net|org|gov|edu)\.cn$/';
+        if ($count > 2 && preg_match($preg,$host)){
+            //双后缀取后3位
+            $host = $parts[$count-3].'.'.$parts[$count-2].'.'.$parts[$count-1];
+        } else{
             // 如果只有两个部分，则直接返回整个host作为主域名
-            return $host;
-        } else {
-            // 如果少于两个部分，可能不是一个有效的域名
-            return '';
+            $host = $parts[$count-2].'.'.$parts[$count-1];
         }
+        return $host;
     }
 }
