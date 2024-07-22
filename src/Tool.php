@@ -33,6 +33,22 @@ class Tool{
         return $cip;
     }
 
+    /**
+     * Description:  获取Origin
+     * Author: JiaMeng <666@majiameng.com>
+     * Updater:
+     * @return string
+     */
+    public static function getOrigin(){
+        $origin = '';
+        if (isset($_SERVER['HTTP_X_ORIGINAL_FOR'])) {
+            $origin = $_SERVER['HTTP_X_ORIGINAL_FOR'];
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $origin = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        return $origin;
+    }
+
 
     /**
      * Description:  是否是移动端
