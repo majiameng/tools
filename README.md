@@ -32,6 +32,7 @@ Welcome Star, welcome PR！
 * 2.7 字符串处理
 * 2.8 递归数组处理
 * 2.9 使用openssl实现非对称加密
+* 2.10 分布式唯一id 详细文档请查看 [分布式唯一id](https://github.com/majiameng/tools/blob/master/UniqueId_README.md)
 
 # Documentation
 
