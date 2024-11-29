@@ -10,7 +10,7 @@ class UrlTool{
      * @param $url
      * @return string
      */
-    function getMainDomain($url) {
+    static public function getMainDomain($url) {
         $url = strtolower($url);//首先转成小写
         $host = parse_url($url, PHP_URL_HOST); // 获取host部分
         if(empty($host)){
