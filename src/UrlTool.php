@@ -43,4 +43,15 @@ class UrlTool{
         }
         return $host;
     }
+
+    /**
+     * 是否是url链接
+     * @param $url
+     * @return bool
+     */
+    public function isURL($url) {
+        $parsedUrl = parse_url($url);
+        return isset($parsedUrl['scheme']) && isset($parsedUrl['host']);
+    }
+
 }
