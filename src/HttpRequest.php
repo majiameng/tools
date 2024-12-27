@@ -2,7 +2,7 @@
 namespace tinymeng\tools;
 
 use tinymeng\tools\exception\StatusCode;
-use tinymeng\tools\exception\TinymengException;
+use tinymeng\tools\exception\TException;
 /**
  * Class HttpRequest
  * @package tinymeng\tools
@@ -98,11 +98,11 @@ class HttpRequest
         if($http_code != null){
             /** 验证网络请求状态 */
             if (intval($info["http_code"]) === 0) {
-                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
                     '[httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true)
                 );
             }elseif(intval($info["http_code"]) != $http_code){
-                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
                     '[httpPost]: POST request was aborted ! Request url :' . $url . ' , post request data : ' . var_export($param,true).' ,return code : '.$info["http_code"] .' ,return content : '.$content
                 );
             } else {
@@ -176,11 +176,11 @@ class HttpRequest
         /** 验证网络请求状态 */
         if($http_code != null){
             if (intval($info["http_code"]) === 0) {
-                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
                     '[httpGet]: GET request was aborted ! Request url :' . $url
                 );
             }elseif(intval($info["http_code"]) != $http_code){
-                throw new TinymengException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
+                throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
                     '[httpGet]: GET request was aborted ! Request url :' . $url .' ,return code : '.$info["http_code"] .' ,return content : '.$content
                 );
             } else {

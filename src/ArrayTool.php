@@ -19,7 +19,9 @@ class ArrayTool{
     static public function arraySort($arr,$keys,$type='asc'){
         $keysValue = $newArray = array();
         foreach ($arr as $k=>$v){
-            $keysValue[$k] = $v[$keys];
+            if(isset($v[$keys])){
+                $keysValue[$k] = $v[$keys];
+            }
         }
         if($type == 'asc'){
             asort($keysValue);
@@ -30,7 +32,7 @@ class ArrayTool{
         foreach ($keysValue as $k=>$v){
             $newArray[$k] = $arr[$k];
         }
-        return $newArray;
+        return array_values($newArray);
     }
 
     /**

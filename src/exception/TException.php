@@ -4,12 +4,12 @@ namespace tinymeng\tools\exception;
 use Exception;
 
 /**
- * Class TinymengException
+ * Class TException
  * @package tinymeng\tools\exception
  * @Author: TinyMeng <666@majiameng.com>
  * @Created: 2020/8/17
  */
-class TinymengException extends \Exception
+class TException extends \Exception
 {
     /**
      * @var int
