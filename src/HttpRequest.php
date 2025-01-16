@@ -30,10 +30,10 @@ class HttpRequest
      * @param array $httpHeaders 添加请求头
      * @param string $proxy 代理ip
      * @param int $http_code 相应正确的状态码
-     * @return mixed
+     * @return bool|string
      * @throws \Exception
      */
-    static public function httpPost($url, $param = array(), $httpHeaders = array(),$proxy='', $http_code = null)
+    static public function httpPost(string $url, array $param = array(), array $httpHeaders = array(), string $proxy='', int $http_code = 200)
     {
         /** 参数检测,object或者array进行http_build_query */
         if(!empty($param) && is_array($param)){
@@ -122,7 +122,7 @@ class HttpRequest
      * @param array $httpHeaders 添加请求头
      * @param string $proxy
      * @param int $http_code 相应正确的状态码
-     * @return mixed
+     * @return bool|string
      * @throws \Exception
      */
     static public function httpGet($url, $param = array(), $httpHeaders = array(),$proxy= '',  $http_code = 200)

@@ -12,7 +12,7 @@ use Exception;
 class TException extends \Exception
 {
     /**
-     * @var int
+     * @var array
      */
     private $headers;
 
@@ -21,11 +21,11 @@ class TException extends \Exception
         $this->setHeaders($headers);
 
         /** message */
-        if(empty($message)) $message = isset(StatusCode::$status_code[$statusCode]) ? StatusCode::$status_code[$statusCode] :StatusCode::$status_code[StatusCode::COMMON_UNKNOWN];
-        parent::__construct('ERROR_TINYMENG_TOOL: '.$message, $code, $previous);
+        if(empty($message)) $message = StatusCode::$status_code[$statusCode] ?? StatusCode::$status_code[StatusCode::COMMON_UNKNOWN];
+        parent::__construct('ERROR tinymeng tools: '.$message, $code, $previous);
     }
 
-    public function getHeaders(): int
+    public function getHeaders(): array
     {
         return $this->headers;
     }
