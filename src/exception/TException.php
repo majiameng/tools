@@ -25,16 +25,19 @@ class TException extends \Exception
         parent::__construct('ERROR tinymeng tools: '.$message, $code, $previous);
     }
 
+    /**
+     * @return array
+     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
     /**
-     * @param array|int $headers
+     * @param array $headers
      * @return TException
      */
-    public function setHeaders($headers): TException
+    public function setHeaders(array $headers): TException
     {
         $this->headers = $headers;
         return $this;

@@ -22,6 +22,10 @@ class HttpRequest
     \tinymeng\tools\HttpRequest::httpPost($url,$data)
      */
 
+    static $httpHeaders = [
+        "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+    ];
+
     /**
      * Description: POST 请求
      * Author: JiaMeng <666@majiameng.com>
@@ -45,7 +49,7 @@ class HttpRequest
                     break;
                 }
             }
-            if($flag == true){
+            if($flag){
                 $param = http_build_query($param);
             }
         }
@@ -62,14 +66,9 @@ class HttpRequest
         curl_setopt($curl, CURLOPT_POSTFIELDS, $param);
 
         /** 设置请求headers */
-        if(empty($httpHeaders)){
-            $httpHeaders = array(
-                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
-            );
-        }
-        if (is_array($httpHeaders)){
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
-        }
+        if(empty($httpHeaders)) $httpHeaders = self::$httpHeaders;
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
+
         /** gzip压缩 */
         curl_setopt($curl, CURLOPT_ACCEPT_ENCODING, "gzip,deflate");
 
@@ -95,7 +94,7 @@ class HttpRequest
         /** 关闭请求资源 */
         curl_close($curl);
 
-        if($http_code !== null){
+        if($http_code !== 0){
             /** 验证网络请求状态 */
             if (intval($info["http_code"]) === 0) {
                 throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
@@ -125,7 +124,7 @@ class HttpRequest
      * @return bool|string
      * @throws \Exception
      */
-    static public function httpGet($url, $param = array(), $httpHeaders = array(),$proxy= '',  $http_code = 200)
+    static public function httpGet(string $url, array $param = array(), array $httpHeaders = array(), string $proxy= '', int $http_code = 200)
     {
         $curl = curl_init();
 
@@ -155,14 +154,9 @@ class HttpRequest
         }
 
         /** 设置请求headers */
-        if(empty($httpHeaders)){
-            $httpHeaders = array(
-                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
-            );
-        }
-        if (is_array($httpHeaders)){
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
-        }
+        if(empty($httpHeaders)) $httpHeaders = self::$httpHeaders;
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
+
         /** gzip压缩 */
         curl_setopt($curl, CURLOPT_ACCEPT_ENCODING, "gzip,deflate");
 
@@ -174,7 +168,7 @@ class HttpRequest
         curl_close($curl);
 
         /** 验证网络请求状态 */
-        if($http_code !== null){
+        if($http_code !== 0){
             if (intval($info["http_code"]) === 0) {
                 throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
                     '[httpGet]: GET request was aborted ! Request url :' . $url
