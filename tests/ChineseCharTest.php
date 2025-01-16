@@ -9,10 +9,6 @@ class ChineseCharTest extends TestCase
     {
         // 这里可以进行一些初始化操作
     }
-    public function testName()
-    {
-        var_dump(ChineseChar::getChineseChar('葛鿉会', false, false));
-    }
 
     public function testGetChineseFirstChar()
     {

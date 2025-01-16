@@ -95,7 +95,7 @@ class HttpRequest
         /** 关闭请求资源 */
         curl_close($curl);
 
-        if($http_code != null){
+        if($http_code !== null){
             /** 验证网络请求状态 */
             if (intval($info["http_code"]) === 0) {
                 throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
@@ -174,7 +174,7 @@ class HttpRequest
         curl_close($curl);
 
         /** 验证网络请求状态 */
-        if($http_code != null){
+        if($http_code !== null){
             if (intval($info["http_code"]) === 0) {
                 throw new TException(StatusCode::COMMON_TINYMENG_REQUEST_METHOD,
                     '[httpGet]: GET request was aborted ! Request url :' . $url

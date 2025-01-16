@@ -255,7 +255,7 @@ class StringTool
             } elseif (strtolower(substr($c, 0, 4)) == '<pre' || strtolower(substr($c, 0, 9)) == '<textarea') {
                 $compress .= $c;
                 continue;
-            } elseif (strtolower(substr($c, 0, 7)) == '<script' && strpos($c, '//') != false && (strpos($c, "\r") !== false || strpos($c, "\n") !== false)) { // JS代码，包含“//”注释的，单行代码不处理
+            } elseif (strtolower(substr($c, 0, 7)) == '<script' && strpos($c, '//') > 0 && (strpos($c, "\r") !== false || strpos($c, "\n") !== false)) { // JS代码，包含“//”注释的，单行代码不处理
                 $tmps = preg_split('/(\r|\n)/ms', $c, -1, PREG_SPLIT_NO_EMPTY);
                 $c    = '';
                 foreach ($tmps as $tmp) {

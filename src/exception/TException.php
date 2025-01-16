@@ -18,15 +18,25 @@ class TException extends \Exception
 
     public function __construct(int $statusCode, string $message = '', Exception $previous = null, array $headers = [], $code = 0)
     {
-        $this->headers    = $headers;
+        $this->setHeaders($headers);
 
         /** message */
         if(empty($message)) $message = isset(StatusCode::$status_code[$statusCode]) ? StatusCode::$status_code[$statusCode] :StatusCode::$status_code[StatusCode::COMMON_UNKNOWN];
         parent::__construct('ERROR_TINYMENG_TOOL: '.$message, $code, $previous);
     }
 
-    public function getHeaders()
+    public function getHeaders(): int
     {
         return $this->headers;
+    }
+
+    /**
+     * @param array|int $headers
+     * @return TException
+     */
+    public function setHeaders($headers): TException
+    {
+        $this->headers = $headers;
+        return $this;
     }
 }

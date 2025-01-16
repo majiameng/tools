@@ -13,7 +13,7 @@ trait Singleton
      */
     private static $instance = null;
 
-    public function __construct($config=null){
+    public function __construct($config=[]){
         $this->config = $config;
     }
 
@@ -25,7 +25,7 @@ trait Singleton
         return [];
     }
 
-    protected static function init($gateway, $config=null)
+    protected static function init($gateway, $config=[])
     {
         if (!self::$instance instanceof static) {
             self::$instance = new static($config);
@@ -35,13 +35,13 @@ trait Singleton
 
     /**
      * Description:  __callStatic
-     * @author: JiaMeng <666@majiameng.com>
-     * Updater:
      * @param $gateway
-     * @param $config
-     * @return mixed
+     * @param array $config
+     * @return Singleton|null
+     *@author: JiaMeng <666@majiameng.com>
+     * Updater:
      */
-    public static function __callStatic($gateway, $config=null)
+    public static function __callStatic($gateway, array $config=[])
     {
         return self::init($gateway, ...$config);
     }

@@ -20,7 +20,7 @@ class AsyncHook{
      */
     public static function hook(callable $callback, $params) {
         self::$hook_list[] = array('callback' => $callback, 'params' => $params);
-        if(self::$hooked == false) {
+        if(self::$hooked === false) {
             self::$hooked = true;
             //注册一个callback当前在脚本执行完后执行
             register_shutdown_function(array(__CLASS__, '__run'));
