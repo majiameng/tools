@@ -15,7 +15,9 @@
     "require": {
         "php": ">=7.0.0",
         "ext-zip": "*",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "ext-mbstring": "*",
+        "ext-ctype": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
