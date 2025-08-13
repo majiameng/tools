@@ -36,29 +36,58 @@ class ArrayTool{
     }
 
     /**
-     * Description:  获取菜单树结构
+     * Description:  获取菜单树结构（递归-性能低）
      * Author: JiaMeng <666@majiameng.com>
      * Updater:
      * @param array $list 数据list
      * @param string $filed 主键字段
-     * @param string $parent_filed 父节点字段
-     * @param int $parent_id 父id值
+     * @param string $parentFiled 父节点字段
+     * @param int $parentId 父id值
+     * @param string $childrenName child
      * @return array
      */
-    public static function getTreeStructure($list,$filed='id',$parent_filed='pid',$parent_id=0){
+    public static function getTreeStructureRecursion(array $list,string $filed='id',string $parentFiled='pid',int $parentId=0,string $childrenName = 'child')
+    {
         $result = array();
         if(!empty($list)){
-            foreach($list as $key=>$val){
-                if($val[$parent_filed] == $parent_id){
-                    $val['child'] = self::getTreeStructure($list,$filed,$parent_filed,$val[$filed]);
-                    if(empty($val['child'])){
-                        unset($val['child']);
+            foreach($list as $val){
+                if($val[$parentFiled] == $parentId){
+                    $val[$childrenName] = self::getTreeStructureRecursion($list,$filed,$parentFiled,$val[$filed]);
+                    if(empty($val[$childrenName])){
+                        unset($val[$childrenName]);
                     }
                     $result[] = $val;
                 }
             }
         }
         return $result;
+    }
+
+    /**
+     * Description:  获取菜单树结构（性能高）
+     * Author: JiaMeng <666@majiameng.com>
+     * Updater:
+     * @param array $list 数据list
+     * @param string $filed 主键字段
+     * @param string $parentFiled 父节点字段
+     * @param string $childrenName child
+     * @return array
+     */
+    public static function getTreeStructure(array $list,string $filed = 'id', string $parentFiled = 'pid', string $childrenName = 'child')
+    {
+        $result = array();
+        foreach ($list as $value) {
+            $result[$value[$filed]] = $value;
+        }
+        static $tree = array(); //格式化好的树
+        foreach ($result as $item) {
+            if (isset($result[$item[$parentFiled]])) {
+                $result[$item[$parentFiled]][$childrenName][] = &$result[$item[$filed]];
+            } else {
+                $tree[] = &$result[$item[$filed]];
+            }
+        }
+        return $tree;
     }
 
     /**
